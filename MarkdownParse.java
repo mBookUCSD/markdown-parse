@@ -48,6 +48,10 @@ public class MarkdownParse {
                         bracketTracker.clear();
                         findLink = true;
                     }
+                } else if (curr == '!') {
+                    if (currentIndex < markdown.length() - 1 && markdown.charAt(currentIndex + 1) == '[') {
+                        currentIndex += 2;
+                    }
                 }
             }
             // move to next char
