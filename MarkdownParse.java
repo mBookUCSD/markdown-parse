@@ -3,26 +3,59 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class MarkdownParse {
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
-        // find the next [, then find the ], then find the (, then take up to
-        // the next )
+        
         int currentIndex = 0;
+        Stack<Character> bracketTracker = new Stack<>(); 
+        boolean findLink = false;
+        int start = 0;
+        int end = 0;
         while(currentIndex < markdown.length()) {
-
-            int nextOpenBracket = markdown.indexOf("[", currentIndex);
-            int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
-            int openParen = markdown.indexOf("(", nextCloseBracket);
-            int closeParen = markdown.indexOf(")", openParen);
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
-            if (markdown.indexOf("[", currentIndex) == -1) {
-                currentIndex = markdown.length();
+            char curr = markdown.charAt(currentIndex);
+            //if an escape char is found, skip it and the 
+            //character it is escaping
+            if (curr == '\\') {
+                currentIndex += 2;
+                continue;
             }
+            //if we are potentially looking at a link with []
+            if (findLink) {
+                // if there arent any other brackets on the bracket tracker
+                if (bracketTracker.isEmpty()) {
+                    if (curr == '(') {
+                        bracketTracker.push(curr);
+                        start = currentIndex;
+                    } else { //something else came after the ] that wasn't (
+                        findLink = false;
+                    }
+                } else {
+                    if (curr == ')') {
+                        end = currentIndex;
+                        toReturn.add(markdown.substring(start + 1, end));
+                        bracketTracker.pop();
+                        findLink = false;
+                    }
+                }
+            } else {
+                if (curr == '[') {
+                    bracketTracker.push(curr);
+                } else if (curr == ']') {
+                    if (!bracketTracker.isEmpty()) {
+                        bracketTracker.clear();
+                        findLink = true;
+                    }
+                }
+            }
+            // move to next char
+            currentIndex++;
         }
+
         return toReturn;
+
     }
     public static void main(String[] args) throws IOException {
 		Path fileName = Path.of(args[0]);
