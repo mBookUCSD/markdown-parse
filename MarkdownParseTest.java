@@ -15,6 +15,12 @@ public class MarkdownParseTest {
 
     // javac -cp ".;lib\junit-4.12.jar;lib\hamcrest-core-1.3.jar" MarkdownParseTest.java
     // java -cp ".;lib/junit-4.12.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore MarkdownParseTest
+    
+    @Test 
+    public void newTest() {
+        // Passes if 2 equals 1 + 1, fails if they are not equal
+        assertTrue(false);
+    }
     @Test 
     public void addition() {
         // Passes if 2 equals 1 + 1, fails if they are not equal
