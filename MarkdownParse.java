@@ -57,8 +57,15 @@ public class MarkdownParse {
             // move to next char
             currentIndex++;
         }
+        // check for spaces and remove
+        ArrayList<String> withNoSpaces = new ArrayList<>();
+        for (String link : toReturn) {
+            if(!link.contains(" ")){
+                withNoSpaces.add(link);
+            }
+        }
 
-        return toReturn;
+        return withNoSpaces;
 
     }
     public static void main(String[] args) throws IOException {
