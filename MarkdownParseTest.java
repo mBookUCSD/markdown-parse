@@ -53,13 +53,14 @@ public class MarkdownParseTest {
     @Test
     public void TestThree() throws IOException, NoSuchFileException {
         //passes if running Markdown parse returns the correct text for "test-file3.md"
-        List<String> correctOutput = List.of("this is a link");
+        ArrayList<String> correctOutput = new ArrayList<>();
+        //List<String> correctOutput = List.of("");
         Path fileName = Path.of("Group-test-file3.md");
         // read the file contents into a string
 	    String contents = Files.readString(fileName);
         // run getLinks on the contents of the file
         ArrayList<String> links = MarkdownParse.getLinks(contents);
-        assertEquals(correctOutput,links);
+        assertEquals(correctOutput.size(),links.size());
     }
 
     @Test
@@ -72,6 +73,17 @@ public class MarkdownParseTest {
         // run getLinks on the contents of the file
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         assertEquals(correctOutput,links);
+    }
+    @Test
+    public void TestFive() throws IOException, NoSuchFileException {
+        //passes if running Markdown parse returns the correct text for "test-file4.md"
+        ArrayList<String> correctOutput = new ArrayList<>();
+        Path fileName = Path.of("Group-test-file5.md");
+        // read the file contents into a string
+	    String contents = Files.readString(fileName);
+        // run getLinks on the contents of the file
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(correctOutput.size(),links.size());
     }
 }
 
