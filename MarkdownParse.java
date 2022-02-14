@@ -27,38 +27,57 @@ public class MarkdownParse {
                 currentIndex += 2;
                 continue;
             }
-            // if we are potentially looking at a link with []
+            // if we are potentially looking at a link after finding []
             if (findLink) {
-                // if there arent any other brackets on the bracket tracker
+                // if there arent any other brackets on the bracket tracker we 
+                // should check what we are looking at and if it is an open 
+                // braket and mark the current index as the start of a link
                 if (bracketTracker.isEmpty()) {
                     if (curr == '(') {
                         bracketTracker.push(curr);
                         start = currentIndex;
-                    } else { // something else came after the ] that wasn't (
+                    } 
+                    // something else came after the ] that wasn't (
+                    else { 
                         findLink = false;
                     }
                 } else {
+                    // if ) then we should note the end of the link down
                     if (curr == ')') {
                         end = currentIndex;
+                        //create substring with only the text of the link
                         String link = markdown.substring(start + 1, end);
+                        //check the link for any spaces
                         if (!containsSpace(link)) {
                             toReturn.add(link);
                         }
+                        // take the ( off the bracket tracker
                         bracketTracker.pop();
                         findLink = false;
                     }
                 }
-            } else {
+            } 
+            else { 
+                // looking for [ in file and adding it to the tracker if so
                 if (curr == '[') {
                     bracketTracker.push(curr);
-                } else if (curr == ']') {
+                } else if (curr == ']') { 
+                    // if found a close bracket and there is a [ on the tracker
+                    // we potentially found a link and should move onto that
                     if (!bracketTracker.isEmpty()) {
                         bracketTracker.clear();
                         findLink = true;
                     }
-                } else if (curr == '!') {
-                    if (currentIndex < markdown.length() - 1 && markdown.charAt(currentIndex + 1) == '[') {
-                        currentIndex += 2;
+                } 
+                else {
+                    // if we find an potential image tag
+                    if (curr == '!') {
+                        //and it is actually before a '[' and not at the end
+                        if (currentIndex < markdown.length() - 1 && 
+                            markdown.charAt(currentIndex + 1) == '[') {
+                            
+                            currentIndex += 2;
+                            }
                     }
                 }
             }
