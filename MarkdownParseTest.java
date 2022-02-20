@@ -152,6 +152,39 @@ public class MarkdownParseTest {
         assertEquals(correctOutput7,links7);
         assertEquals(correctOutput8,links8);
     }
+
+    /*Single Issue Tests
+    @Test
+    public void testMissingParen(){
+        String contents= "[link](a.com";
+        List<String> expect = List.of();
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
+    @Test
+    public void testOpenBracketInLink(){
+        String contents= "[link](a.c(om)";
+        List<String> expect = List.of();
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
+    @Test
+    public void testSpacesAroundLink(){
+        String contents= "[link](   a.com    )";
+        List<String> expect = List.of("a.com");
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
+    @Test
+    public void testOpenBracketInTextOfImage(){
+        String contents= "![l[ink](a.com)";
+        List<String> expect = List.of("a.com");
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
+    @Test
+    public void testEscapedBracketInLinkText(){
+        String contents= "[This\\]is](a.com)";
+        List<String> expect = List.of("a.com");
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
+    */
 }
 
 
