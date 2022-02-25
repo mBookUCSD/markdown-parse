@@ -187,6 +187,7 @@ public class MarkdownParseTest {
         List<String> expect = List.of("a.com");
         assertEquals(MarkdownParse.getLinks(contents), expect);
     }
+    // Lab 8 Test for snippet 1
     @Test
     public void testSnip1() throws IOException, NoSuchFileException {
 
@@ -199,6 +200,7 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         assertEquals(correctOutput,links);
     }
+    // Lab 8 Test for snippet 2
     @Test
     public void testSnip2() throws IOException, NoSuchFileException {
 
@@ -211,6 +213,7 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         assertEquals(correctOutput,links);
     }
+    // Lab 8 Test for snippet 3
     @Test
     public void testSnip3() throws IOException, NoSuchFileException {
 
