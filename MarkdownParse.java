@@ -8,7 +8,7 @@ import java.util.Stack;
 
 public class MarkdownParse {
     public static boolean containsSpace(String link) {
-        return link.trim().contains(" ");
+        return link.contains(" ");
     }
 
     public static ArrayList<String> getLinks(String markdown) {
@@ -46,7 +46,7 @@ public class MarkdownParse {
                     if (curr == ')') {
                         end = currentIndex;
                         //create substring with only the text of the link
-                        String link = markdown.substring(start + 1, end);
+                        String link = markdown.substring(start + 1, end);//.trim();
                         //check the link for any spaces
                         if (!containsSpace(link)) {
                             toReturn.add(link);
