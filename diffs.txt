@@ -1,0 +1,58 @@
+46c46
+< test-files/14.md[/foo]
+---
+> test-files/14.md[]
+106c106
+< test-files/194.md[url]
+---
+> test-files/194.md[]
+115c115
+< test-files/201.md[baz]
+---
+> test-files/201.md[]
+433c433,434
+< test-files/489.md[]
+---
+> test-files/489.md[foo
+> bar]
+435c436,437
+< test-files/490.md[]
+---
+> test-files/490.md[<foo
+> bar>]
+440,444c442,446
+< test-files/495.md[foo(and(bar))]
+< test-files/496.md[]
+< test-files/497.md[]
+< test-files/498.md[]
+< test-files/499.md[foo\]
+---
+> test-files/495.md[foo(and(bar]
+> test-files/496.md[foo(and(bar]
+> test-files/497.md[foo\(and\(bar\)]
+> test-files/498.md[<foo(and(bar]
+> test-files/499.md[foo\)\:]
+458,460c460,462
+< test-files/510.md[/uri]
+< test-files/511.md[/uri]
+< test-files/512.md[/uri]
+---
+> test-files/510.md[]
+> test-files/511.md[]
+> test-files/512.md[]
+527c529
+< test-files/573.md[/url]
+---
+> test-files/573.md[]
+531c533
+< test-files/577.md[train.jpg]
+---
+> test-files/577.md[]
+533c535
+< test-files/579.md[<url>]
+---
+> test-files/579.md[]
+535c537
+< test-files/580.md[/url]
+---
+> test-files/580.md[]
