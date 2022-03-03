@@ -5,12 +5,52 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.io.File;
+
+
 
 public class MarkdownParse {
+    public static boolean containsBrackets(String link) {
+        if(!link.contains("[")){return false;}
+        if(!link.contains("]")){return false;}
+        if(!link.contains("(")){return false;}
+        if(!link.contains(")")){return false;}
+        return true;
+    }
     public static boolean containsSpace(String link) {
         return link.contains(" ");
     }
 
+    //Copied from https://github.com/ucsd-cse15l-w22/markdown-parse/blob/1f7485854d92deb69c1bf8290c267fee27371d17/MarkdownParse.java#L32-L50
+    //For Lab 9
+    public static Map<String, List<String>> getLinks(File dirOrFile) throws IOException {
+        Map<String, List<String>> result = new HashMap<>();
+        if(dirOrFile.isDirectory()) {
+            for(File f: dirOrFile.listFiles()) {
+                result.putAll(getLinks(f));
+            }
+            return result;
+        }
+        else {
+            Path p = dirOrFile.toPath();
+            int lastDot = p.toString().lastIndexOf(".");
+            if(lastDot == -1 || !p.toString().substring(lastDot).equals(".md")) {
+                return result;
+            }
+            ArrayList<String> links = getLinks(Files.readString(p));
+            String filename = p.toString();
+            if(containsBrackets(Files.readString(p))){
+                System.out.println(filename + " does contain the needed brackets.");
+            }else{
+                System.out.println(filename + " does not contain the needed brackets.");
+            }
+            result.put(dirOrFile.getPath(), links);
+            return result;
+        }
+    }
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
 
@@ -90,9 +130,8 @@ public class MarkdownParse {
     }
 
     public static void main(String[] args) throws IOException {
-        Path fileName = Path.of(args[0]);
-        String contents = Files.readString(fileName);
-        ArrayList<String> links = getLinks(contents);
+        Map<String, List<String>> links = getLinks(new File(args[0]));
         System.out.println(links);
+        
     }
 }
