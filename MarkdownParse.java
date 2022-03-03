@@ -8,7 +8,7 @@ import java.util.Stack;
 
 public class MarkdownParse {
     public static boolean containsSpace(String link) {
-        return link.contains(" ");
+        return link.trim().contains(" ");
     }
 
     public static ArrayList<String> getLinks(String markdown) {

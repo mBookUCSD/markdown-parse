@@ -167,14 +167,14 @@ public class MarkdownParseTest {
         List<String> expect = List.of();
         assertEquals(MarkdownParse.getLinks(contents), expect);
     }
-   
+    */
     @Test
     public void testSpacesAroundLink(){
         String contents= "[link](   a.com    )";
         List<String> expect = List.of("a.com");
         assertEquals(expect, MarkdownParse.getLinks(contents));
     }
-    */
+    
     @Test
     public void testOpenBracketInTextOfImage(){
         String contents= "![l[ink](a.com)";
@@ -187,7 +187,9 @@ public class MarkdownParseTest {
         List<String> expect = List.of("a.com");
         assertEquals(MarkdownParse.getLinks(contents), expect);
     }
+
     // Lab 8 Test for snippet 1
+    /*
     @Test
     public void testSnip1() throws IOException, NoSuchFileException {
 
@@ -226,6 +228,7 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         assertEquals(correctOutput,links);
     }
+    */
     
 }
 
